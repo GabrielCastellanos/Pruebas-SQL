@@ -1,0 +1,786 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Parte 1. Consola</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="133b91b3-067a-801d-8ce7-fd15dd49d7a4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💻</span></div><h1 class="page-title">Parte 1. Consola</h1><p class="page-description"></p></header><div class="page-body"><h3 id="133b91b3-067a-8028-b295-f2b6a9567da3" class="">Ejercicio 1</h3><p id="133b91b3-067a-8079-96d7-f2c1b086797e" class="">El equipo de desarrollo ha enviado una tarea: debes averiguar qué solicitudes han venido de una dirección IP. Una dirección IP consta de cuatro números separados por un punto. Necesitas direcciones que comiencen con &quot;233.201&quot;.</p><p id="133b91b3-067a-805d-a43b-db820bfe58cd" class="">Los logs están en un servidor remoto en <code>logs/2019/12</code>. No sabes qué día ocurrió el error.</p><p id="133b91b3-067a-80ef-9244-ddca500bc26f" class="">Tu tarea es averiguar qué solicitudes fueron enviadas.</p><p id="133b91b3-067a-802f-ab1e-c198f97ce2aa" class="">Esto es lo que debes adjuntar en la respuesta:</p><ol type="1" id="133b91b3-067a-80c3-874a-ef24281fa7a6" class="numbered-list" start="1"><li>El comando que usaste para obtener los logs necesarios.</li></ol><ol type="1" id="133b91b3-067a-80ed-901b-e9ef490180ad" class="numbered-list" start="2"><li>Los strings adecuados, por ejemplo: <code>184.79.247.161 - - [30/12/2019:21:38:13 +0000] &quot;PUT /alerts HTTP/1.1&quot; 400 3557</code></li></ol><p id="133b91b3-067a-80e0-95b0-e3c126395ff3" class="">
+</p><p id="133b91b3-067a-808f-9eb5-e4765dc975a7" class=""><mark class="highlight-orange">Resultados del ejercicio 1. </mark></p><ol type="1" id="133b91b3-067a-80af-84f3-d54ff551601f" class="numbered-list" start="1"><li>El comando que usaste para obtener los logs necesarios.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-8010-8640-c88ca20e25e2" class="code"><code class="language-SQL">* grep -r &quot;^233.201&quot; ~/logs/2019/12</code></pre><p id="133b91b3-067a-8050-a2ff-de32a6f98b62" class="">Los registros del comando usado </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-803e-a39a-f6761cfa322b" class="code"><code class="language-SQL">*/home/morty/logs/2019/12/apache_2019-12-18.txt:233.201.188.154 - - [18/12/2019:21:46:01 +0000] &quot;DELETE /events HTTP/1.1&quot; 403 3971
+/home/morty/logs/2019/12/apache_2019-12-21.txt:233.201.182.9 - - [21/12/2019:21:56:20 +0000] &quot;PATCH /users HTTP/1.1&quot; 400 4118
+</code></pre><h3 id="133b91b3-067a-8015-a7a0-e66cdc6e64fe" class="">Ejercicio 2</h3><p id="133b91b3-067a-8055-8b66-dffbbd575558" class="">Se ha detectado un error en el sistema. Estaba activo el 12.30.2019. En ese momento, había errores 400 y 500. Tu tarea consiste en guardar los logs que se registraron durante este periodo en un archivo independiente.</p><p id="133b91b3-067a-8091-acc7-edcf9d5358bf" class="">Después, debes poner estos logs en archivos por separado con base en los errores. A continuación te explicamos cómo hacerlo:</p><ol type="1" id="133b91b3-067a-80c3-ba0a-fdb73f52a0c5" class="numbered-list" start="1"><li>En el directorio de inicio del servidor remoto, crea un directorio llamado <code>bug1</code>.</li></ol><ol type="1" id="133b91b3-067a-800f-a23c-e3b65814308c" class="numbered-list" start="2"><li>Pon todas las solicitudes que ocurrieron en el archivo <code>main.txt</code> en el directorio <code>bug1</code>.</li></ol><ol type="1" id="133b91b3-067a-8097-bb16-fdc545bbe204" class="numbered-list" start="3"><li>Dentro del directorio <code>bug1</code> , crea un directorio <code>events</code>.</li></ol><ol type="1" id="133b91b3-067a-80a0-a503-dc1f3c2da00b" class="numbered-list" start="4"><li>Dentro del directorio <code>events</code>, crea archivos de error 400 y 500. Llama a estos archivos <code>400.txt</code> y <code>500.txt</code>, respectivamente. Identifica en ellos los logs utilizando el error correspondiente del archivo <code>main.txt</code>.</li></ol><p id="133b91b3-067a-8057-b524-db04dc3c0bf1" class="">Esto es lo que debes adjuntar en la respuesta:</p><ol type="1" id="133b91b3-067a-8023-9205-ebf883aae5e0" class="numbered-list" start="1"><li>Los comandos que crean los directorios <code>bug1</code> y <code>events</code>.</li></ol><ol type="1" id="133b91b3-067a-8081-922a-fe091a342717" class="numbered-list" start="2"><li>Los comandos que utilizaste para seleccionar los registros especificados para el archivo <code>main.txt</code>.</li></ol><ol type="1" id="133b91b3-067a-8052-8585-eb1ae9cdd519" class="numbered-list" start="3"><li>Los comandos que usas para colocar los logs en los archivos <code>400.txt</code> y <code>500.txt</code> de <code>main.txt</code>.</li></ol><ol type="1" id="133b91b3-067a-80a8-9d07-d508b8faf5b9" class="numbered-list" start="4"><li>Los archivos de texto <code>400.txt</code> y <code>500.txt</code>.</li></ol><p id="133b91b3-067a-8058-9c20-c5c09e86380f" class="">
+</p><p id="133b91b3-067a-80e9-8a68-cdaf147c4f7c" class=""><mark class="highlight-orange">Resultados del ejercicio 2.</mark></p><p id="133b91b3-067a-802f-8a02-e8d855ff4da7" class="">Comandos que crean los directorios bug1 y events:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-8057-94d2-c34250d5ef26" class="code"><code class="language-SQL">*morty@cnt-8be96c6f-d6e5-450b-8cda-8ceb86526397:~$ mkdir bug1
+morty@cnt-8be96c6f-d6e5-450b-8cda-8ceb86526397:~/bug1$ mkdir events
+</code></pre><p id="133b91b3-067a-809f-a1bd-e2a14d3c450b" class="">El comando que usas para seleccionar las solicitudes para un periodo especificado.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-8041-8b66-eccb12c554a9" class="code"><code class="language-SQL">morty@cnt-d5c80e91-fedb-4c66-9099-65355794f348:~/logs/2019/12$ grep &quot;30/12/2019:21:3&quot; apache_2019-12-30.txt
+morty@cnt-d5c80e91-fedb-4c66-9099-65355794f348:~/logs/2019/12$ grep &quot;31/12/2019:21:3&quot; apache_2019-12-31.txt
+</code></pre><p id="133b91b3-067a-80f5-9129-d97471667743" class="">Estas son las solicitudes que usas para obtener registros en el archivo main.txt:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-80f4-a424-e318e6605d96" class="code"><code class="language-SQL">*grep &quot;30/12/2019:21:3&quot; ~/logs/2019/12/apache_2019-12-30.txt &gt; main.txt
+grep &quot;31/12/2019:21:3&quot; ~/logs/2019/12/apache_2019-12-31.txt &gt; main.txt
+</code></pre><p id="133b91b3-067a-8064-bfc2-fba1c168c46a" class="">Los comandos que usas para colocar los registros en los archivos 400.txt y 500.txt del main.txt:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-805f-bdd9-d2b5a9c0e4db" class="code"><code class="language-SQL">*grep &quot;400&quot; main.txt &gt; ~/bug1/events/400.txt
+*grep &quot;500&quot; main.txt &gt; ~/bug1/events/500.txt</code></pre><p id="133b91b3-067a-8081-81f6-ecd1746dc005" class="">Los archivos de texto <code>400.txt</code> para el dia 30 y 31 </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-80b7-b2e6-dec45a4d67ba" class="code"><code class="language-SQL">86.34.86.182 - - [31/12/2019:21:35:10 +0000] &quot;POST /auth HTTP/1.1&quot; 400 3626 
+167.37.16.117 - - [31/12/2019:21:35:17 +0000] &quot;PATCH /customers HTTP/1.1&quot; 400 3294
+199.128.92.19 - - [31/12/2019:21:35:43 +0000] &quot;PUT /users HTTP/1.1&quot; 400 4180
+162.152.99.143 - - [31/12/2019:21:35:59 +0000] &quot;PUT /users HTTP/1.1&quot; 400 4606
+83.115.59.224 - - [31/12/2019:21:37:26 +0000] &quot;GET /alerts HTTP/1.1&quot; 400 3489
+194.10.97.226 - - [31/12/2019:21:37:31 +0000] &quot;DELETE /lists HTTP/1.1&quot; 400 2447
+180.99.214.40 - - [31/12/2019:21:37:44 +0000] &quot;DELETE /alerts HTTP/1.1&quot; 400 2077
+154.152.205.4 - - [31/12/2019:21:37:50 +0000] &quot;GET /playbooks HTTP/1.1&quot; 400 3324
+197.82.125.54 - - [31/12/2019:21:37:52 +0000] &quot;PUT /fieldsets HTTP/1.1&quot; 400 4365
+115.89.87.219 - - [31/12/2019:21:38:06 +0000] &quot;PUT /playbooks HTTP/1.1&quot; 400 2589
+100.77.15.14 - - [31/12/2019:21:38:07 +0000] &quot;GET /fieldsets HTTP/1.1&quot; 400 4911
+22.33.159.242 - - [31/12/2019:21:38:07 +0000] &quot;GET /playbooks HTTP/1.1&quot; 400 3955
+149.148.229.11 - - [31/12/2019:21:39:16 +0000] &quot;GET /users HTTP/1.1&quot; 400 2071
+236.107.64.192 - - [31/12/2019:21:39:17 +0000] &quot;PATCH /users HTTP/1.1&quot; 400 2791
+24.156.105.39 - - [31/12/2019:21:39:23 +0000] &quot;GET /lists HTTP/1.1&quot; 400 2902
+193.50.164.254 - - [31/12/2019:21:39:23 +0000] &quot;PUT /playbooks HTTP/1.1&quot; 400 3296
+18.123.104.91 - - [31/12/2019:21:39:52 +0000] &quot;GET /collectors HTTP/1.1&quot; 400 4372
+234.218.148.4 - - [31/12/2019:21:39:54 +0000] &quot;PUT /users HTTP/1.1&quot; 400 2509
+
+80.57.170.51 - - [30/12/2019:21:35:12 +0000] &quot;DELETE /users HTTP/1.1&quot; 400 3623
+204.235.176.118 - - [30/12/2019:21:35:13 +0000] &quot;POST /users HTTP/1.1&quot; 400 4704
+82.95.203.67 - - [30/12/2019:21:35:19 +0000] &quot;DELETE /lists HTTP/1.1&quot; 400 3737
+155.242.215.46 - - [30/12/2019:21:35:38 +0000] &quot;POST /playbooks HTTP/1.1&quot; 400 4450
+189.176.85.0 - - [30/12/2019:21:35:39 +0000] &quot;PATCH /alerts HTTP/1.1&quot; 400 2732
+13.108.71.71 - - [30/12/2019:21:35:43 +0000] &quot;PATCH /events HTTP/1.1&quot; 400 3410
+195.213.133.182 - - [30/12/2019:21:35:46 +0000] &quot;PUT /customers HTTP/1.1&quot; 400 3085
+235.243.133.78 - - [30/12/2019:21:35:47 +0000] &quot;PATCH /customers HTTP/1.1&quot; 400 3264
+192.57.115.49 - - [30/12/2019:21:35:55 +0000] &quot;POST /parsers HTTP/1.1&quot; 400 2457
+71.0.49.244 - - [30/12/2019:21:35:55 +0000] &quot;PUT /collectors HTTP/1.1&quot; 400 2785
+224.159.206.126 - - [30/12/2019:21:36:02 +0000] &quot;DELETE /customers HTTP/1.1&quot; 400 4569
+131.35.106.246 - - [30/12/2019:21:36:04 +0000] &quot;DELETE /lists HTTP/1.1&quot; 400 2578
+216.24.42.208 - - [30/12/2019:21:36:06 +0000] &quot;GET /parsers HTTP/1.1&quot; 400 4597
+123.53.150.160 - - [30/12/2019:21:37:19 +0000] &quot;PATCH /events HTTP/1.1&quot; 400 4379
+61.129.127.103 - - [30/12/2019:21:37:32 +0000] &quot;GET /lists HTTP/1.1&quot; 400 2575
+90.216.4.78 - - [30/12/2019:21:37:34 +0000] &quot;PATCH /lists HTTP/1.1&quot; 400 3899
+204.250.214.208 - - [30/12/2019:21:37:36 +0000] &quot;PATCH /parsers HTTP/1.1&quot; 400 4742
+79.214.240.98 - - [30/12/2019:21:37:37 +0000] &quot;POST /fieldsets HTTP/1.1&quot; 400 4441
+65.47.42.12 - - [30/12/2019:21:37:39 +0000] &quot;PATCH /customers HTTP/1.1&quot; 400 2500
+251.118.141.34 - - [30/12/2019:21:37:41 +0000] &quot;POST /customers HTTP/1.1&quot; 400 3519
+205.20.166.196 - - [30/12/2019:21:37:51 +0000] &quot;POST /users HTTP/1.1&quot; 400 4032
+156.217.3.46 - - [30/12/2019:21:37:52 +0000] &quot;PATCH /parsers HTTP/1.1&quot; 400 2020
+48.240.198.167 - - [30/12/2019:21:37:57 +0000] &quot;PATCH /playbooks HTTP/1.1&quot; 400 4100
+101.255.159.211 - - [30/12/2019:21:37:59 +0000] &quot;GET /auth HTTP/1.1&quot; 400 2324
+80.76.98.203 - - [30/12/2019:21:38:00 +0000] &quot;POST /playbooks HTTP/1.1&quot; 400 3045
+85.64.63.255 - - [30/12/2019:21:38:13 +0000] &quot;PATCH /collectors HTTP/1.1&quot; 400 2291
+184.79.247.161 - - [30/12/2019:21:38:13 +0000] &quot;PUT /alerts HTTP/1.1&quot; 400 3557
+93.2.134.22 - - [30/12/2019:21:39:39 +0000] &quot;DELETE /alerts HTTP/1.1&quot; 400 3701
+
+</code></pre><p id="133b91b3-067a-8064-bff4-e4fc446294fd" class="">Los archivos de texto <code>500.txt</code> para el dia 30 y 31 </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="133b91b3-067a-80ce-893e-d2e757730ce4" class="code"><code class="language-SQL">*208.205.133.127 - - [31/12/2019:21:35:17 +0000] &quot;DELETE /alerts HTTP/1.1&quot; 500 4561
+20.145.255.91 - - [31/12/2019:21:35:30 +0000] &quot;GET /parsers HTTP/1.1&quot; 500 3051
+91.66.134.13 - - [31/12/2019:21:35:53 +0000] &quot;POST /lists HTTP/1.1&quot; 500 3319
+31.88.211.206 - - [31/12/2019:21:35:57 +0000] &quot;DELETE /events HTTP/1.1&quot; 500 2325
+171.37.114.114 - - [31/12/2019:21:37:39 +0000] &quot;DELETE /fieldsets HTTP/1.1&quot; 500 3253
+223.157.242.167 - - [31/12/2019:21:37:59 +0000] &quot;POST /users HTTP/1.1&quot; 500 2283
+98.181.102.34 - - [31/12/2019:21:38:06 +0000] &quot;PATCH /fieldsets HTTP/1.1&quot; 500 4672
+254.74.22.79 - - [31/12/2019:21:38:06 +0000] &quot;PUT /lists HTTP/1.1&quot; 500 2259
+103.46.238.3 - - [31/12/2019:21:38:09 +0000] &quot;PUT /lists HTTP/1.1&quot; 500 3992
+41.62.205.107 - - [31/12/2019:21:39:20 +0000] &quot;PATCH /alerts HTTP/1.1&quot; 500 3631
+22.53.105.197 - - [31/12/2019:21:39:31 +0000] &quot;DELETE /collectors HTTP/1.1&quot; 500 4202
+178.22.133.42 - - [31/12/2019:21:39:43 +0000] &quot;PUT /alerts HTTP/1.1&quot; 500 4648
+102.247.13.50 - - [31/12/2019:21:39:55 +0000] &quot;PATCH /auth HTTP/1.1&quot; 500 3736
+
+/home/morty/logs/2019/12/apache_2019-12-30.txt:64.250.112.189 - - [30/12/2019:21:35:13 +0000] &quot;PUT /parsers HTTP/1.1&quot; 500 4639
+/home/morty/logs/2019/12/apache_2019-12-30.txt:193.253.101.180 - - [30/12/2019:21:35:31 +0000] &quot;PATCH /alerts HTTP/1.1&quot; 500 2944
+/home/morty/logs/2019/12/apache_2019-12-30.txt:197.106.117.194 - - [30/12/2019:21:35:31 +0000] &quot;PATCH /parsers HTTP/1.1&quot; 500 3519
+/home/morty/logs/2019/12/apache_2019-12-30.txt:247.124.71.67 - - [30/12/2019:21:35:45 +0000] &quot;PUT /alerts HTTP/1.1&quot; 500 2746
+/home/morty/logs/2019/12/apache_2019-12-30.txt:62.88.204.119 - - [30/12/2019:21:35:51 +0000] &quot;PUT /auth HTTP/1.1&quot; 500 2666
+/home/morty/logs/2019/12/apache_2019-12-30.txt:125.156.142.26 - - [30/12/2019:21:36:01 +0000] &quot;PATCH /events HTTP/1.1&quot; 500 3460
+/home/morty/logs/2019/12/apache_2019-12-30.txt:144.170.212.70 - - [30/12/2019:21:36:04 +0000] &quot;DELETE /parsers HTTP/1.1&quot; 500 2599
+/home/morty/logs/2019/12/apache_2019-12-30.txt:59.39.200.252 - - [30/12/2019:21:36:05 +0000] &quot;GET /alerts HTTP/1.1&quot; 500 2650
+/home/morty/logs/2019/12/apache_2019-12-30.txt:150.136.200.100 - - [30/12/2019:21:37:24 +0000] &quot;POST /lists HTTP/1.1&quot; 500 2684
+/home/morty/logs/2019/12/apache_2019-12-30.txt:84.81.25.45 - - [30/12/2019:21:37:25 +0000] &quot;POST /auth HTTP/1.1&quot; 500 2052
+/home/morty/logs/2019/12/apache_2019-12-30.txt:30.222.160.141 - - [30/12/2019:21:37:30 +0000] &quot;PATCH /parsers HTTP/1.1&quot; 500 2017
+/home/morty/logs/2019/12/apache_2019-12-30.txt:117.87.158.36 - - [30/12/2019:21:37:34 +0000] &quot;POST /fieldsets HTTP/1.1&quot; 500 4056
+/home/morty/logs/2019/12/apache_2019-12-30.txt:212.153.128.212 - - [30/12/2019:21:37:42 +0000] &quot;PUT /fieldsets HTTP/1.1&quot; 500 3259
+/home/morty/logs/2019/12/apache_2019-12-30.txt:58.188.83.217 - - [30/12/2019:21:37:46 +0000] &quot;POST /playbooks HTTP/1.1&quot; 500 3947
+/home/morty/logs/2019/12/apache_2019-12-30.txt:193.123.131.146 - - [30/12/2019:21:37:47 +0000] &quot;PUT /lists HTTP/1.1&quot; 500 3902
+/home/morty/logs/2019/12/apache_2019-12-30.txt:182.7.179.91 - - [30/12/2019:21:37:48 +0000] &quot;GET /users HTTP/1.1&quot; 500 2950
+/home/morty/logs/2019/12/apache_2019-12-30.txt:10.25.168.164 - - [30/12/2019:21:38:05 +0000] &quot;PATCH /playbooks HTTP/1.1&quot; 500 3858
+/home/morty/logs/2019/12/apache_2019-12-30.txt:215.201.210.173 - - [30/12/2019:21:38:11 +0000] &quot;PATCH /customers HTTP/1.1&quot; 500 3277
+/home/morty/logs/2019/12/apache_2019-12-30.txt:179.241.103.167 - - [30/12/2019:21:39:23 +0000] &quot;POST /lists HTTP/1.1&quot; 500 3669
+/home/morty/logs/2019/12/apache_2019-12-30.txt:147.188.170.252 - - [30/12/2019:21:39:33 +0000] &quot;POST /fieldsets HTTP/1.1&quot; 500 3313
+/home/morty/logs/2019/12/apache_2019-12-30.txt:1.249.123.189 - - [30/12/2019:21:39:36 +0000] &quot;PATCH /alerts HTTP/1.1&quot; 500 4734
+/home/morty/logs/2019/12/apache_2019-12-30.txt:124.114.135.105 - - [30/12/2019:21:39:41 +0000] &quot;PATCH /customers HTTP/1.1&quot; 500 3348
+/home/morty/logs/2019/12/apache_2019-12-30.txt:35.215.100.202 - - [30/12/2019:21:39:43 +0000] &quot;PUT /alerts HTTP/1.1&quot; 500 4345
+/home/morty/logs/2019/12/apache_2019-12-30.txt:86.222.23.128 - - [30/12/2019:21:39:44 +0000] &quot;PATCH /alerts HTTP/1.1&quot; 500 2230
+/home/morty/logs/2019/12/apache_2019-12-30.txt:20.161.75.95 - - [30/12/2019:21:39:48 +0000] &quot;DELETE /users HTTP/1.1&quot; 500 2412
+/home/morty/logs/2019/12/apache_2019-12-30.txt:196.18.151.117 - - [30/12/2019:21:39:55 +0000] &quot;PUT /events HTTP/1.1&quot; 500 4439
+/home/morty/logs/2019/12/apache_2019-12-30.txt:77.101.138.151 - - [30/12/2019:21:39:57 +0000] &quot;PUT /lists HTTP/1.1&quot; 500 2194
+
+</code></pre><p id="133b91b3-067a-8051-8966-db7bae1d1360" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
